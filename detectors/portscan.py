@@ -4,7 +4,7 @@ from collections import defaultdict
 import time
 
 class PortScanDetector:
-    def __init__(self, iface="any", threshold=10, time_window=5):
+    def __init__(self, iface="ens33", threshold=10, time_window=5):
         self.iface = iface
         self.threshold = threshold
         self.time_window = time_window
