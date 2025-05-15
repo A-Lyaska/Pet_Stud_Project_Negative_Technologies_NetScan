@@ -12,7 +12,7 @@ class SSHBruteForceDetector:
         self.pattern = re.compile(r"Failed password.*from (\d+\.\d+\.\d+\.\d+)")
 
     def run(self):
-        print("[*] Мониторинг SSH логов...")
+        print("[*] Мониторинг SSH логов активен...")
         with open(self.logfile, "r") as f:
             # Перемещаемся в конец файла
             f.seek(0, 2)
