@@ -14,7 +14,6 @@ class SSHBruteForceDetector:
     def run(self):
         print("[*] Мониторинг SSH логов активен...")
         with open(self.logfile, "r") as f:
-            # Перемещаемся в конец файла
             f.seek(0, 2)
             while True:
                 line = f.readline()
@@ -28,7 +27,6 @@ class SSHBruteForceDetector:
                     now = time.time()
                     self.attempts[ip].append(now)
 
-                    # Очистка старых записей
                     self.attempts[ip] = [
                         ts for ts in self.attempts[ip] if now - ts <= self.time_window
                     ]

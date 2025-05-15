@@ -32,5 +32,5 @@ class PortScanDetector:
                     self.connection_log[src_ip].clear()  # избежать дублирования
 
     def run(self):
-        print("[*] Мониторинг Тихого сканирования активен...")
+        print("[*] Мониторинг сканирования Открытых портов активен...")
         sniff(iface=self.iface, prn=self.process_packet, store=0)
