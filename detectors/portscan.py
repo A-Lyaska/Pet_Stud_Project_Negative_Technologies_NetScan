@@ -15,22 +15,35 @@ class PortScanDetector:
             src_ip = packet[IP].src
             dst_port = packet[TCP].dport
             flags = packet[TCP].flags
+            current_time = time.time()
 
-            # Только SYN-пакеты
+            scan_type = None
+
             if flags == "S":
-                current_time = time.time()
-                self.connection_log[src_ip].append((dst_port, current_time))
+                scan_type = "SYN Port Scan"
+            elif flags == 0:
+                scan_type = "NULL Port Scan"
+            elif flags == "F":
+                scan_type = "FIN Port Scan"
+            elif set(str(flags)) >= set("FPU"):
+                scan_type = "XMAS Port Scan"
 
-                # Оставляем только актуальные записи
+            if scan_type:
+                self.connection_log[src_ip].append((dst_port, current_time, scan_type))
+
+                # Очищаем старые записи
                 self.connection_log[src_ip] = [
-                    (port, ts) for port, ts in self.connection_log[src_ip]
+                    (port, ts, stype) for port, ts, stype in self.connection_log[src_ip]
                     if current_time - ts <= self.time_window
                 ]
 
-                if len(set(port for port, _ in self.connection_log[src_ip])) > self.threshold:
-                    log_attack("Port Scan Detected", src_ip)
-                    self.connection_log[src_ip].clear()  # избежать дублирования
+                # Считаем количество разных портов
+                unique_ports = set(port for port, _, _ in self.connection_log[src_ip])
+
+                if len(unique_ports) > self.threshold:
+                    log_attack(scan_type, src_ip)
+                    self.connection_log[src_ip].clear()
 
     def run(self):
-        print("[*] Мониторинг сканирования Открытых портов активен...")
+        print("[*] PortScanDetector запущен...")
         sniff(iface=self.iface, prn=self.process_packet, store=0)
