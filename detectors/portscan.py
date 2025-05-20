@@ -45,5 +45,5 @@ class PortScanDetector:
                     self.connection_log[src_ip].clear()
 
     def run(self):
-        print("[*] PortScanDetector запущен...")
+        print("[*] Мониторинг сканирования Открытых портов запущен...")
         sniff(iface=self.iface, prn=self.process_packet, store=0)

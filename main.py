@@ -1,6 +1,7 @@
 from threading import Thread
 from detectors.icmp_flood import ICMPFloodDetector
 from detectors.portscan import PortScanDetector
+from detectors.reverse_shell_detector import ReverseShellDetector
 from detectors.ssh_bruteforce import SSHBruteForceDetector
 from detectors.arp_spoof import ARPSpoofDetector
 from detectors.mac_flood import MACFloodDetector
@@ -13,18 +14,21 @@ def main():
     icmp_flood = ICMPFloodDetector()
     arp_spoof = ARPSpoofDetector()
     mac_flood = MACFloodDetector()
+    revers_shell = ReverseShellDetector()
 
     t1 = Thread(target=portscan_detector.run)
     t2 = Thread(target=ssh_bruteforce_detector.run)
     t3 = Thread(target=icmp_flood.run)
     t4 = Thread(target=arp_spoof.run)
     t5 = Thread(target=mac_flood.run)
+    t6 = Thread(target=revers_shell.run)
 
     t1.start()
     t2.start()
     t3.start()
     t4.start()
     t5.start()
+    t6.start()
 
     try:
         t1.join()
@@ -32,6 +36,7 @@ def main():
         t3.join()
         t4.join()
         t5.join()
+        t6.join()
     except KeyboardInterrupt:
         print("\n[*] Остановка...")
 
