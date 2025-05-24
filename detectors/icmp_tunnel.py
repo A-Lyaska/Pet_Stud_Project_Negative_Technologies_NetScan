@@ -1,7 +1,7 @@
 from scapy.all import sniff, IP, ICMP
 from utils.logger import log_attack
 
-class ICMPTunnelDetector:
+class IcmpTunnelDetector:
     def __init__(self, iface="ens33", size_threshold=200):
         self.iface = iface
         self.size_threshold = size_threshold
