@@ -22,10 +22,10 @@ def index():
 
 @app.route("/logs")
 def logs():
-    attack_type = request.args.get("type")
+    attack_type = request.args.get("attack")
     data = load_attacks()
     if attack_type and attack_type != "all":
-        data = [a for a in data if a["type"] == attack_type]
+        data = [a for a in data if a["attack"] == attack_type]
     return jsonify(data)
 
 if __name__ == "__main__":
