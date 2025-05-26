@@ -23,7 +23,7 @@ class MACFloodDetector:
                     del self.mac_activity[mac]
 
             if len(self.mac_activity) > self.threshold:
-                log_attack("MAC Flooding / DHCP Starvation Detected", f"{len(self.mac_activity)} MACs")
+                log_attack("MAC Flooding / DHCP Starvation Detected", f"{len(self.mac_activity)} MACs", "Как же они достали с истощением DHCP и флудом Мак адресов")
                 self.mac_activity.clear()
 
     def run(self):

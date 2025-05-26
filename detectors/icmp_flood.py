@@ -23,7 +23,7 @@ class ICMPFloodDetector:
                 ]
 
                 if len(self.packet_log[src_ip]) > self.threshold:
-                    log_attack("ICMP Flood обнаружен", src_ip)
+                    log_attack("ICMP Flood обнаружен", src_ip, "Зачем опять флудят???")
                     self.packet_log[src_ip].clear()
 
     def run(self):

@@ -16,7 +16,7 @@ class ARPSpoofDetector:
             self.arp_table[src_ip].add(src_mac)
 
             if len(self.arp_table[src_ip]) > 1:
-                log_attack("ARP Spoofing Detected", src_ip)
+                log_attack("ARP Spoofing Detected", src_ip, "Кто-то отравляет нашу сеть")
                 self.arp_table[src_ip].clear()
 
     def run(self):

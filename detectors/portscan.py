@@ -41,7 +41,7 @@ class PortScanDetector:
                 unique_ports = set(port for port, _, _ in self.connection_log[src_ip])
 
                 if len(unique_ports) > self.threshold:
-                    log_attack(scan_type, src_ip)
+                    log_attack(scan_type, src_ip, "Опять индусы сканируют. Пора наложить санкции, мистер Президент")
                     self.connection_log[src_ip].clear()
 
     def run(self):

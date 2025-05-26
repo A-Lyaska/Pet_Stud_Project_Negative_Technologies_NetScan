@@ -7,7 +7,7 @@ LOG_FILE = os.path.join(LOG_DIR, "attacks.json")
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
-def log_attack(attack_type, details, ip):
+def log_attack(attack_type, ip, details):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     log_entry = {
         "Date attack": now,

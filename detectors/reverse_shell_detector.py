@@ -19,7 +19,7 @@ class ReverseShellDetector:
 
             if flags == "S":
                 if dst_port in SUSPICIOUS_PORTS or dst_port not in WHITELIST_PORTS:
-                    log_attack("Reverse Shell", f"Предположительная попытка Reverse Shell на порту {dst_port}", dst_ip)
+                    log_attack("Reverse Shell", f"Предположительная попытка Reverse Shell на порту {dst_port}", dst_ip, "У нас есть крыса")
 
     def run(self):
         print("[*] Мониторинг Reverse Shell активен...")
