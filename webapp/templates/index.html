@@ -20,7 +20,7 @@
                 <option value="SSH Brute-force обнаружен">SSH Brute-force</option>
                 <option value="Reverse Shell">Reverse Shell</option>
                 <option value="MAC Flooding / DHCP Starvation Detected">MAC Flooding и DHCP Starvation</option>
-                <option value="ICMP-туннель">ICMP-туннель</option>
+                <option value="ICMP Tunnel">ICMP-туннель</option>
                 <option value="ICMP Flood обнаружен">ICMP Flood</option>
                 <option value="ARP Spoofing Detected">ARP Spoofing</option>
             </select>
@@ -51,6 +51,7 @@
                         <span class="text-sm text-gray-400">${attack.time}</span>
                     </div>
                     <div class="mt-2 text-sm text-gray-300">Источник: ${attack.ip}</div>
+                    <div class="mt-1 text-sm text-gray-500 italic">${attack.details}</div>
                 `;
                 container.appendChild(div);
             });

@@ -14,13 +14,15 @@ def load_attacks():
                 attack = {
                     "time": raw.get("Date attack", ""),
                     "type": raw.get("Type attack", ""),
-                    "ip": raw.get("Badboy's IP", "")
+                    "ip": raw.get("Badboy's IP", ""),
+                    "details": raw.get("Details", "")
                 }
                 attacks.append(attack)
         attacks.reverse()
     except FileNotFoundError:
         pass
     return attacks
+
 
 @app.route("/")
 def index():
@@ -39,7 +41,7 @@ def logs():
         a_details = a.get("details", "")
 
         if attack_type and attack_type != "all":
-            if attack_type not in a_type:
+            if attack_type != a_type:
                 continue
 
         result.append({
@@ -50,8 +52,6 @@ def logs():
         })
 
     return jsonify(result)
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=8080)
