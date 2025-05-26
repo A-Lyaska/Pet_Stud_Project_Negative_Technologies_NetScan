@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NT_NetScan — Мониторинг атак</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">🛡️ Обнаруженные атаки</h1>
+
+        <!-- Фильтр -->
+        <div class="mb-6 text-center">
+            <label for="filter" class="text-sm text-gray-400">Фильтр по типу:</label>
+            <select id="filter" class="bg-gray-800 text-white px-3 py-1 rounded ml-2">
+                <option value="all">Все</option>
+                <option value="SYN Scan">SYN Scan</option>
+                <option value="XMAS Scan">XMAS Scan</option>
+                <option value="NULL Scan">NULL Scan</option>
+                <option value="FIN Scan">FIN Scan</option>
+                <option value="SSH Brute-force">SSH Brute-force</option>
+                <option value="Reverse Shell">Reverse Shell</option>
+                <option value="MAC Flooding">MAC Flooding</option>
+                <option value="DHCP Starvation">DHCP Starvation</option>
+                <option value="ICMP Tunnel">ICMP Tunnel</option>
+                <option value="ICMP Flood">ICMP Flood</option>
+                <option value="ARP Spoofing">ARP Spoofing</option>
+            </select>
+        </div>
+
+        <!-- Атаки -->
+        <div id="log-container" class="grid gap-4"></div>
+    </div>
+
+    <script>
+        async function loadLogs() {
+            const type = document.getElementById("filter").value;
+            const res = await fetch(`/logs?type=${type}`);
+            const data = await res.json();
+            const container = document.getElementById("log-container");
+            container.innerHTML = "";
+
+            if (data.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-400">Нет зафиксированных атак</div>`;
+                return;
+            }
+
+            data.forEach(attack => {
+                const div = document.createElement("div");
+                div.className = "bg-gray-800 p-4 rounded-xl shadow-lg hover:bg-gray-700 transition";
+                div.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="text-lg font-semibold text-red-400">${attack.type}</span>
+                        <span class="text-sm text-gray-400">${attack.time}</span>
+                    </div>
+                    <div class="mt-2 text-sm text-gray-300">Источник: ${attack.ip}</div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        document.getElementById("filter").addEventListener("change", loadLogs);
+        setInterval(loadLogs, 5000);
+        window.onload = loadLogs;
+    </script>
+</body>
+</html>
