@@ -32,5 +32,5 @@ class SSHBruteForceDetector:
                     ]
 
                     if len(self.attempts[ip]) >= self.threshold:
-                        log_attack("SSH Brute-force Detected", ip)
+                        log_attack("SSH Brute-force обнаружен", ip)
                         self.attempts[ip].clear()
