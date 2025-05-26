@@ -2,7 +2,7 @@ from scapy.all import sniff, IP, TCP
 from utils.logger import log_attack
 
 SUSPICIOUS_PORTS = [1337, 4321, 4444, 9001, 12345]
-WHITELIST_PORTS = [80, 443, 53, 22]
+WHITELIST_PORTS = [80, 443, 53, 22, 8080]
 
 class ReverseShellDetector:
     def __init__(self, iface="ens33"):
