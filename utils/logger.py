@@ -3,7 +3,7 @@ import json
 from datetime import datetime
 
 LOG_DIR = "log"
-LOG_FILE = os.path.join(LOG_DIR, "attacks.log")
+LOG_FILE = os.path.join(LOG_DIR, "attacks.json")
 
 os.makedirs(LOG_DIR, exist_ok=True)
 
