@@ -2,6 +2,7 @@ from flask import Flask, render_template, jsonify, request
 import json
 
 app = Flask(__name__)
+
 LOG_FILE = "log/attacks.log"
 
 def load_attacks():
@@ -9,13 +10,7 @@ def load_attacks():
     try:
         with open(LOG_FILE, "r") as f:
             for line in f:
-                raw = json.loads(line.strip())
-                attack = {
-                    "type": raw.get("Вид атаки", ""),
-                    "time": raw.get("Время атаки", ""),
-                    "ip": raw.get("IP злоумышленника", "")
-                }
-                attacks.append(attack)
+                attacks.append(json.loads(line.strip()))
         attacks.reverse()
     except FileNotFoundError:
         pass
