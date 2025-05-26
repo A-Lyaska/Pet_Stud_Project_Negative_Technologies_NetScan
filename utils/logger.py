@@ -9,17 +9,17 @@ os.makedirs(LOG_DIR, exist_ok=True)
 
 def log_attack(attack_type, details, ip):
     now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    record = {
+    log_entry = {
         "Date attack": now,
         "Type attack": attack_type,
-        "Details": details,
-        "Badboy's IP": ip
+        "Badboy's IP": ip,
+        "Details": details
     }
     with open("log/attacks.json", "a") as f:
-        f.write(json.dumps(record) + "\n")
+        f.write(json.dumps(log_entry) + "\n")
 
     print(f"[{now}] [{attack_type}] from {ip} - {details}")
-    
+
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(log_entry) + "\n")
         f.flush()
