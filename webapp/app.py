@@ -33,10 +33,10 @@ def logs():
     result = []
 
     for a in raw_data:
-        a_type = a.get("Type attack", "")
-        a_ip = a.get("Badboy's IP", "")
-        a_time = a.get("Date attack", "")
-        a_details = a.get("Details")
+        a_type = a.get("type", "")
+        a_ip = a.get("ip", "")
+        a_time = a.get("time", "")
+        a_details = a.get("details", "")
 
         if attack_type and attack_type != "all":
             if attack_type not in a_type:
@@ -50,6 +50,7 @@ def logs():
         })
 
     return jsonify(result)
+
 
 
 if __name__ == "__main__":
