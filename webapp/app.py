@@ -10,7 +10,13 @@ def load_attacks():
     try:
         with open(LOG_FILE, "r") as f:
             for line in f:
-                attacks.append(json.loads(line.strip()))
+                raw = json.loads(line.strip())
+                attack = {
+                    "type": raw.get("Type attack", "Unknown"),
+                    "time": raw.get("Date attack", ""),
+                    "ip": raw.get("Badboy's IP", "")
+                }
+                attacks.append(attack)
         attacks.reverse()
     except FileNotFoundError:
         pass
