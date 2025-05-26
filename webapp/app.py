@@ -3,7 +3,7 @@ import json
 
 app = Flask(__name__)
 
-LOG_FILE = "../logs/attacks.log"
+LOG_FILE = "log/attacks.log"
 
 def load_attacks():
     attacks = []
