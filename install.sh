@@ -17,5 +17,8 @@ venv/bin/pip3 install -r requirements.txt
 echo "[*] Создание структуры каталогов..."
 mkdir -p log detectors utils
 
-echo "[!!!] Установка завершена. Для запуска введите следующую команду:"
+echo "[!!!] Установка завершена. Для запуска мониторинга введите следующую команду:"
 echo "    sudo venv/bin/python3 main.py"
+
+echo "[!!!] Установка завершена. Для запуска веб-интерфейса введите следующую команду в новом терминале:"
+echo "    sudo venv/bin/python3 webapp/app.py"
