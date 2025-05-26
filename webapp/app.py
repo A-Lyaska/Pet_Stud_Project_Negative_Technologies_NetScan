@@ -27,7 +27,7 @@ def index():
 
 @app.route("/logs")
 def logs():
-    attack_type = request.args.get("type")  # было "attack"
+    attack_type = request.args.get("type")
     data = load_attacks()
     if attack_type and attack_type != "all":
         data = [a for a in data if a["type"] == attack_type]
