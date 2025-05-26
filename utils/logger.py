@@ -13,7 +13,6 @@ def log_attack(attack_type, source_ip):
         "Date attack": now,
         "Type attack": attack_type,
         "Badboy's IP": source_ip,
-        "Message": message
     }
     print(f"[{now}] [{attack_type}] from {source_ip}")
     with open(LOG_FILE, "a") as f:
