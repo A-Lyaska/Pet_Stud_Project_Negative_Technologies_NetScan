@@ -12,8 +12,8 @@ def load_attacks():
             for line in f:
                 raw = json.loads(line.strip())
                 attack = {
-                    "type": raw.get("Type attack", "Unknown"),
                     "time": raw.get("Date attack", ""),
+                    "type": raw.get("Type attack", ""),
                     "ip": raw.get("Badboy's IP", "")
                 }
                 attacks.append(attack)
@@ -28,10 +28,10 @@ def index():
 
 @app.route("/logs")
 def logs():
-    attack_type = request.args.get("type")
+    attack_type = request.args.get("type", "all")
     data = load_attacks()
-    if attack_type and attack_type != "all":
-        data = [a for a in data if a["type"] == attack_type]
+    if attack_type.lower() != "all":
+        data = [a for a in data if a["type"].lower() == attack_type.lower()]
     return jsonify(data)
 
 if __name__ == "__main__":
