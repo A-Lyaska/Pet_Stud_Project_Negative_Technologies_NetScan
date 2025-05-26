@@ -16,7 +16,8 @@ class IcmpTunnelDetector:
 
                 if payload_size > self.size_threshold:
                     log_attack(
-                        f"Подозрение на ICMP-туннель (большой объём пакетов): {payload_size} bytes",
+                        f"Подозрение на ICMP-туннель (большой объём пакетов):"
+                        f"{payload_size} байт",
                         ip_layer.src
                     )
 
