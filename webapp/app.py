@@ -2,7 +2,6 @@ from flask import Flask, render_template, jsonify, request
 import json
 
 app = Flask(__name__)
-
 LOG_FILE = "log/attacks.log"
 
 def load_attacks():
@@ -10,7 +9,13 @@ def load_attacks():
     try:
         with open(LOG_FILE, "r") as f:
             for line in f:
-                attacks.append(json.loads(line.strip()))
+                raw = json.loads(line.strip())
+                attack = {
+                    "type": raw.get("Вид атаки", ""),
+                    "time": raw.get("Время атаки", ""),
+                    "ip": raw.get("IP злоумышленника", "")
+                }
+                attacks.append(attack)
         attacks.reverse()
     except FileNotFoundError:
         pass
@@ -22,10 +27,10 @@ def index():
 
 @app.route("/logs")
 def logs():
-    attack_type = request.args.get("attack")
+    attack_type = request.args.get("type")  # было "attack"
     data = load_attacks()
     if attack_type and attack_type != "all":
-        data = [a for a in data if a["attack"] == attack_type]
+        data = [a for a in data if a["type"] == attack_type]
     return jsonify(data)
 
 if __name__ == "__main__":
