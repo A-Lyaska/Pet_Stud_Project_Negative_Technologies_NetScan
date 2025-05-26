@@ -12,9 +12,13 @@ def log_attack(attack_type, source_ip, details=None):
     log_entry = {
         "Date attack": now,
         "Type attack": attack_type,
-        "Badboy's IP": source_ip,
+        "Badboy's IP": source_ip
     }
-    print(f"[{now}] [{attack_type}] from {source_ip}")
+    if details:
+        log_entry["Details"] = details
+
+    print(f"[{now}] [{attack_type}] from {source_ip} - {details or ''}")
+    
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(log_entry) + "\n")
         f.flush()
