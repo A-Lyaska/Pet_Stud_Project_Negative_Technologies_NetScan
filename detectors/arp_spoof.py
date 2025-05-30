@@ -1,7 +1,6 @@
 from scapy.all import sniff, ARP
 from utils.logger import log_attack
 from collections import defaultdict
-import threading
 
 class ARPSpoofDetector:
     def __init__(self, iface="ens33"):

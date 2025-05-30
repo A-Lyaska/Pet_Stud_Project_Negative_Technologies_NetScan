@@ -29,3 +29,6 @@ class MACFloodDetector:
     def run(self):
         print("[*] Мониторинг MAC Flooding / DHCP Starvation активен...")
         sniff(iface=self.iface, prn=self.process_packet, store=0)
+
+
+
